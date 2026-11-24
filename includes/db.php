@@ -15,11 +15,23 @@ $options = [
 
 if (getenv('DB_SSL') === 'true') {
     $caPath = getenv('DB_SSL_CA');
+    if (!$caPath || !file_exists($caPath)) {
+        foreach ([
+            '/etc/pki/tls/certs/ca-bundle.crt',
+            '/etc/ssl/certs/ca-certificates.crt',
+            '/etc/ssl/cert.pem',
+            'C:/xampp/apache/bin/curl-ca-bundle.crt',
+        ] as $candidate) {
+            if (file_exists($candidate)) {
+                $caPath = $candidate;
+                break;
+            }
+        }
+    }
     if ($caPath && file_exists($caPath)) {
         $options[PDO::MYSQL_ATTR_SSL_CA] = $caPath;
-    } else {
-        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
     }
+    $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
 }
 
 try {
