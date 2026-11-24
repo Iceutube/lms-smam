@@ -28,9 +28,17 @@ Aplikasi **Learning Management System (LMS)** berbasis web untuk sekolah (**LMS 
    git clone https://github.com/Iceutube/lms-smam.git
    ```
 2. Nyalakan **Apache** dan **MySQL** di XAMPP Control Panel.
-3. Buat database MySQL bernama `db_lms` (atau sesuaikan lewat environment variables).
+3. Buat database MySQL bernama `db_lms`, lalu import file `database/db_lms.sql`.
 4. Konfigurasi koneksi berada di `includes/db.php` (secara default mengarah ke `localhost`, user `root`, password kosong, database `db_lms`).
 5. Buka `http://localhost/lms-smam` di browser.
+
+## Akun Demo (dari `database/db_lms.sql`)
+
+| Role | Email / NIS | Password |
+| --- | --- | --- |
+| Admin | `admin@smam.sch.id` | `admin123` |
+| Guru | `guru@smam.sch.id` | `guru123` |
+| Siswa | `siswa@smam.sch.id` / `2025001` | `siswa123` |
 
 ## Konfigurasi Environment Variables (Vercel / Produksi)
 
